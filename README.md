@@ -88,11 +88,7 @@ python scripts/train_realign.py \
   --device cuda
 ```
 
-The released defaults use the final rank-16 NoMixer architecture with 2.28M trainable parameters. Training uses AdamW for 15K steps with learning rate `5e-4`, weight decay `0.01`, 200 warmup steps, cosine decay, gradient clipping at `1.0`, and batches containing 16 corrupted pairs plus 3 clean identity pairs. The objective is
-
-\[
-\mathcal{L}=\mathcal{L}_{\mathrm{tok}}+\mathcal{L}_{\mathrm{rec}}+10^{-4}\mathcal{L}_{\mathrm{res}}.
-\]
+The released defaults use the final rank-16 NoMixer architecture with 2.28M trainable parameters. Training uses AdamW for 15K steps with learning rate `5e-4`, weight decay `0.01`, 200 warmup steps, cosine decay, gradient clipping at `1.0`, and batches containing 16 corrupted pairs plus 3 clean identity pairs. 
 
 Only ReAlign parameters are optimized. The VLA and visual encoders remain frozen. `best.pt` is selected by held-out validation token cosine similarity, while `last.pt` can be used to resume training:
 
