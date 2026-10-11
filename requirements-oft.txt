@@ -1,0 +1,35 @@
+# Optional frozen-policy integration. Core training and synthetic tests use requirements.txt only.
+-r requirements.txt
+torchvision==0.17.0
+transformers @ git+https://github.com/moojink/transformers-openvla-oft.git@bc339d9ad707454c0c115970db43c260067c61ab
+tokenizers==0.19.1
+timm==0.9.10
+accelerate==1.15.0
+peft==0.11.1
+diffusers==0.30.3
+draccus==0.8.0
+einops==0.8.2
+sentencepiece==0.1.99
+huggingface-hub==0.36.2
+json-numpy==2.1.1
+jsonlines==4.0.0
+Pillow==12.3.0
+imageio==2.38.0
+matplotlib==3.10.9
+rich==15.0.0
+wandb==0.28.0  # Required by upstream imports; this release never initializes logging to a service.
+tensorflow==2.15.0
+tensorflow-datasets==4.9.3
+tensorflow-metadata==1.17.3
+tensorflow-graphics==2021.12.3
+tensorflow-probability==0.23.0
+dlimp @ git+https://github.com/moojink/dlimp_openvla.git@040105d256bd28866cc6620621a3d5f7b6b91b46
+robosuite==1.4.1
+mujoco==2.3.7
+bddl==3.6.0
+gym==0.26.2
+easydict==1.13
+cloudpickle==3.1.2
+Wand==0.7.2
+scikit-image==0.25.2
+scipy==1.15.3

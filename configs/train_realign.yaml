@@ -1,0 +1,63 @@
+model:
+  rank: 16
+  feature_dim: 2176
+  agent_tokens: 256
+  wrist_tokens: 256
+  hidden_dim: 256
+  layers: 2
+  heads: 4  # Original constructor RNG compatibility; no attention mixer remains.
+  alpha: 1.0
+optimization:
+  lr: 0.0005
+  weight_decay: 0.01
+  warmup_steps: 200
+  total_steps: 15000
+  grad_clip: 1.0
+  seed: 0
+  corrupted_batch_size: 16
+  identity_batch_size: 3
+  validate_every: 500
+loss:
+  lambda_rec: 1.0
+  lambda_res: 0.0001
+data:
+  suite: libero_spatial
+  train_init_states: [1, 2, 3, 4, 5, 6, 7, 8]
+  val_init_states: [9, 10]
+  sample_every_env_steps: 4
+  corruptions_per_clean_frame: 3
+  corruption_seed: 0
+  successful_trajectories_only: true
+  task_names:
+    - pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate
+    - pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate
+corruptions:  # Executable bank has these fixed, source-audited ranges.
+  gaussian_blur: {probability: 0.25, sigma: [0.5, 11.0]}
+  motion_blur: {probability: 0.25, length_inclusive: [3, 45], angle_degrees: [0, 360]}
+  zoom_blur: {probability: 0.20, maximum_zoom: [1.05, 1.6], zoom_samples: 10}
+  glass_blur: {probability: 0.15, sigma: [0.5, 3.0], delta_inclusive: [1, 6]}
+  gaussian_noise: {probability: 0.15, std_fraction: [0.01, 0.08]}
+upstream:
+  oft_root: upstreams/openvla-oft
+  libero_root: upstreams/LIBERO-plus
+  backend: libero_plus
+  checkpoint: moojink/openvla-7b-oft-finetuned-libero-spatial-object-goal-10
+  checkpoint_revision: 638918f3d1c2e43a39a8a20772bdb8b91835e4b7
+  runtime_dir: runs/extraction_runtime
+inference:
+  seed: 7
+  num_images_in_input: 2
+  use_proprio: true
+  center_crop: true
+  action_chunk: 8
+  settling_steps: 10
+  env_image_resolution: 256
+  use_clean_instruction: true

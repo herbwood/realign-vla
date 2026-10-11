@@ -1,0 +1,19 @@
+upstream:
+  oft_root: upstreams/openvla-oft
+  libero_root: upstreams/LIBERO-plus  # Set to upstreams/LIBERO for unperturbed LIBERO.
+  backend: libero_plus
+  checkpoint: moojink/openvla-7b-oft-finetuned-libero-spatial-object-goal-10
+  checkpoint_revision: 638918f3d1c2e43a39a8a20772bdb8b91835e4b7
+  runtime_dir: runs/evaluation_runtime
+evaluation:
+  suite: libero_spatial  # libero_object is supported; action horizon becomes 280.
+  task_indices: [0]     # Small integration example, NOT a paper-controlled manifest.
+  init_states: [0]
+  use_clean_instruction: true
+  seed: 7
+  num_images_in_input: 2
+  use_proprio: true
+  center_crop: true
+  action_chunk: 8
+  settling_steps: 10
+  env_image_resolution: 256
