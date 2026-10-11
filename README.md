@@ -1,5 +1,9 @@
 # ReAlign-VLA
 
+<p align="center">
+  <img src="realign_overview.png" alt="FORGE overview" width="100%">
+</p>
+
 **Realign perception, not policy.** ReAlign-VLA is a lightweight post-encoder module for improving visual robustness in frozen vision-language-action policies. It predicts a token-adaptive low-rank residual for corrupted third-person visual features while leaving the visual encoder, wrist stream, and downstream VLA unchanged.
 
 ## Abstract
